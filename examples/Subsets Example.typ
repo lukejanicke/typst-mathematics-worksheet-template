@@ -1,5 +1,5 @@
 #import "../worksheet.typ": worksheet, question, part, task, answers, answer, solutions, solution
-#show: worksheet.with(title: [Numbering and optional sections], page-numbers: false)
+#show: worksheet.with(title: [Subsets Example], page-numbers: false)
 #question(parts: (part[$x+1=3$], part[$x+2=5$], part[$x+3=7$], part[$x+4=9$], part[$x+5=11$]), columns: 2, working: 0)[Solve.]
 #question(working: 0)[$2x=8$]
 #question(working: 0)[$3x=15$]

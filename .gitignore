@@ -5,8 +5,8 @@
 
 # Generated PDFs, except the two published example outputs
 *.pdf
-!/examples/linear-equations.pdf
-!/examples/numbering-subsets.pdf
+!/examples/Example.pdf
+!/examples/Subsets Example.pdf
 
 # Python caches and interrupted verification fixtures
 __pycache__/

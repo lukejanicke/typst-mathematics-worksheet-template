@@ -2,7 +2,7 @@
 #import "@preview/simple-plot:1.1.0": plot
 
 #show: worksheet.with(
-  title: [Solving linear equations],
+  title: [Example],
   page-numbers: true,
 )
 
