@@ -1,0 +1,2 @@
+# PDFs are binary even when their opening data looks like text.
+*.pdf binary

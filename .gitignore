@@ -1,0 +1,20 @@
+# Local project instructions and working material
+/AGENTS.md
+/tmp/
+/output/
+
+# Generated PDFs, except the two published example outputs
+*.pdf
+!/examples/linear-equations.pdf
+!/examples/numbering-subsets.pdf
+
+# Python caches and interrupted verification fixtures
+__pycache__/
+*.py[cod]
+/tests/fixture-*/
+
+# Operating system files and local credentials
+.DS_Store
+Thumbs.db
+.env
+.env.*
