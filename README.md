@@ -9,7 +9,7 @@ Developed and verified with Typst 0.15.1.
 ## Examples
 
 - **Example** — [PDF](examples/Example.pdf) · [Typst source](examples/Example.typ). Demonstrates question and sub-part numbering, columns, shared instructions, working space, marks, figures, tables, graphs, and complete answer and solution sections.
-- **Subsets Example** — [PDF](examples/Subsets%20Example.pdf) · [Typst source](examples/Subsets%20Example.typ). Demonstrates selected answers and solutions, omitted entries, explicit numbering references, and counter resets.
+- **Subsets Example** — [PDF](examples/Subsets%20Example.pdf) · [Typst source](examples/Subsets%20Example.typ). Demonstrates selected answers and solutions, numbering jumps, and two whole questions side by side. The tagged PDF includes spoken equations, table headers, and a graph description.
 
 ## Licence
 

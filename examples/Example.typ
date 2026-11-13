@@ -1,4 +1,4 @@
-#import "../worksheet.typ": worksheet, question, part, task, answers, answer, solutions, solution
+#import "../worksheet.typ": worksheet, question, part, task, answers, answer, solutions, solution, graph-options
 #import "@preview/simple-plot:1.1.0": plot
 
 #show: worksheet.with(
@@ -13,8 +13,9 @@ Use inverse operations to solve each equation. Show your working in the space pr
 == One-step equations
 
 #question(columns: 3, working: 3, parts: (
+  // Omitted or none inherits the question default; an integer replaces it.
   part[$x + 7 = 15$], part[$y - 9 = 4$], part[$5a = 35$],
-  part[$b / 4 = 6$], part[$m + 3 = -2$], part[$-3n = 18$],
+  part(working: 2)[$b / 4 = 6$], part(working: 4)[$m + 3 = -2$], part[$-3n = 18$],
 ))[Solve each equation.]
 
 #question(columns: 2, working: 3, tasks: (
@@ -54,9 +55,10 @@ Explain why this is a useful first step, then finish the solution.],
 
 #question(columns: 1, working: 4, parts: (
   part(marks: 1)[$2(x + 5) = 26$],
-  part(parts: (
+  // This part passes its three-line default to each Roman item.
+  part(working: 3, parts: (
     task(marks: 2)[Expand the brackets and solve $4(y - 1) = 2y + 10$.],
-    task(marks: 1)[Check your solution by substitution.],
+    task(marks: 1, working: 2)[Check your solution by substitution.],
   ))[],
 ))[Show a clear sequence of equivalent equations.]
 
@@ -95,20 +97,39 @@ Let $h$ be the number of hours. Write and solve an equation to find how long Mia
 ))
 ]
 
-#question(working: 2)[The graph shows the cost $C$ dollars of hiring equipment for $t$ hours. The relation is $C = 4t + 8$. Use an equation to find the time when the cost is \$24, then check it on the graph.
+// Keep this introductory prompt with its complete graph row.
+#pagebreak()
+#question(columns: 2, working: 3, parts: (
+  part(working: 2, parts: (
+    task[Use an equation to find the time when the cost is \$24.],
+    // Zero replaces the parent default: annotate the graph itself.
+    task(working: 0)[Mark the point for this hire on the graph.
 
-#v(12pt, weak: true)
-#align(center, plot(
-  width: 5cm, height: 3cm,
-  xmin: 0, xmax: 5,
-  ymin: 0, ymax: 30,
-  xtick-step: 1, ytick-step: 10,
-  xlabel: [$t$ (hours)], xlabel-pos: "center", xlabel-offset: (0, -0.6),
-  ylabel: [$C$ (dollars)], ylabel-anchor: "south-west", ylabel-offset: (0, 0.15),
-  tick-label-size: 12pt, axis-label-size: 12pt,
-  style: (axis: (stroke: black + 0.5pt), ticks: (stroke: black + 0.5pt)),
-  (fn: t => 4 * t + 8, stroke: black + 0.8pt),
-))
+      #v(12pt, weak: true)
+      #align(center, plot(
+        ..graph-options,
+        width: 5cm, height: 4.5cm,
+        xmin: 0, xmax: 5,
+        ymin: 0, ymax: 30,
+        xtick-step: 1, ytick-step: 2, ytick-label-step: 5, show-grid: "major",
+        xlabel: [$t$ (hours)], xlabel-pos: "center", xlabel-offset: (0, -0.6),
+        ylabel: [$C$ (dollars)], ylabel-anchor: "south-west", ylabel-offset: (0, 0.15),
+        (fn: t => 4 * t + 8, stroke: black + 0.8pt),
+      ))
+    ],
+  ))[],
+  part(working: 4)[Find the cost of a 3-hour hire, then explain what the vertical intercept represents.],
+))[The graph shows the cost $C$ dollars of hiring equipment for $t$ hours. The relation is $C = 4t + 8$.]
+
+#question(working: 3)[The two angles shown lie on a straight line. Find the size of each angle.
+
+  #v(12pt, weak: true)
+  #align(center, box(width: 6cm, height: 1.6cm)[
+    #place(top + left, line(start: (0cm, 1.5cm), end: (6cm, 1.5cm), stroke: 0.5pt))
+    #place(top + left, line(start: (3cm, 1.5cm), end: (3.26cm, 0cm), stroke: 0.5pt))
+    #place(top + left, dx: 2.05cm, dy: 0.85cm)[$(2x) degree$]
+    #place(top + left, dx: 3.4cm, dy: 0.85cm)[$(x + 30) degree$]
+  ])
 ]
 
 #answers[
@@ -127,7 +148,11 @@ Let $h$ be the number of hours. Write and solve an equation to find how long Mia
   #answer[$8+6h=38$; $h=5$. The hire lasted 5 hours.]
   #answer[$2x+2(x+3)=30$; $x=6$. Width 6 cm; length 9 cm.]
   #answer[Booking fee \$7; $7+2d=23$; $d=8$ km.]
-  #answer[$4t+8=24$; $t=4$ hours.]
+  #answer(parts: (
+    part(parts: (task[$4t+8=24$; $t=4$ hours.], task[Mark $(4, 24)$.]))[],
+    part[\$20; the fixed hire charge is \$8.],
+  ))[]
+  #answer[Left angle $100 degree$, right angle $80 degree$.]
 ]
 
 #solutions[
@@ -356,12 +381,29 @@ Let $h$ be the number of hours. Write and solve an equation to find how long Mia
       d &= 8 $
     The distance travelled is 8 km.
   ]
+  #solution(parts: (
+    part(parts: (
+      task[
+        Substitute $C = 24$ into $C = 4t + 8$.
+        $ 4t + 8 &= 24 \
+          4t &= 16 \
+          t &= 4 $
+        The hire time is 4 hours.
+      ],
+      task[Read across from $C = 24$ to the line, then down to $t = 4$. Mark the point $(4, 24)$.],
+    ))[],
+    part[
+      Substitute $t = 3$ into $C = 4t + 8$.
+      $ C &= 4 times 3 + 8 \
+          &= 20 $
+      The cost is \$20. The vertical intercept is 8, representing the fixed \$8 hire charge before any hourly charge.
+    ],
+  ))[]
   #solution[
-    Substitute $C = 24$ into $C = 4t + 8$.
-    $ 4t + 8 &= 24 \
-      4t &= 16 \
-      t &= 4 $
-    The hire time is 4 hours. To check on the graph, read across from $C = 24$
-    to the line, then down to the time axis: $t = 4$.
+    Angles on a straight line add to $180 degree$.
+    $ 2x + (x + 30) &= 180 \
+      3x &= 150 \
+      x &= 50 $
+    The angles are $2 times 50 degree = 100 degree$ and $(50 + 30) degree = 80 degree$.
   ]
 ]

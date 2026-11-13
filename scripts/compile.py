@@ -10,6 +10,9 @@ import sys
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path.cwd(), help="Typst project root (default: current directory)")
+    parser.add_argument("--check-keys", action="store_true",
+                        help="reject duplicate or nonexistent question numbers in answers and solutions")
+    parser.add_argument("--pdf-standard", help="PDF standard to pass to Typst, e.g. ua-1")
     parser.add_argument("source", type=Path)
     parser.add_argument("output", type=Path, nargs="?")
     args = parser.parse_args()
@@ -17,12 +20,16 @@ def main():
     root = str(args.root.resolve())
     output = (args.output or args.source.with_suffix(".pdf")).resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
-    result = subprocess.run(["typst", "compile", "--root", root, str(source), str(output)])
+    options = ["--root", root]
+    if args.check_keys:
+        options.extend(["--input", "worksheet-check-keys=true"])
+    export = ["--pdf-standard", args.pdf_standard] if args.pdf_standard else []
+    result = subprocess.run(["typst", "compile", *options, *export, str(source), str(output)])
     if result.returncode:
         return result.returncode
     result = subprocess.run(
         ["typst", "eval", "query(<worksheet-caution>).map(it => it.value)",
-         "--in", str(source), "--root", root], capture_output=True, text=True)
+         "--in", str(source), *options], capture_output=True, text=True)
     if result.returncode:
         sys.stderr.write(result.stderr)
         return result.returncode
